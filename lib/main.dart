@@ -28,7 +28,7 @@ class _MyAppState extends State<MyApp> {
         '/': (context) => const LPScreen(),  // Landing Page Screen
         '/login': (context) => const LoginPage(),  // Login Screen
         '/signup': (context) => const SignupScreen(),  // SignUp Screen
-        '/dashboard': (context) => const DashboardScreen(),  // Dashboard Screen
+        '/dashboard': (context) => const ArtDashboard(),  // Dashboard Screen
       },
     );
   }
