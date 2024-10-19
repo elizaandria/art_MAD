@@ -60,25 +60,31 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
-     - lib/assets/images/LP_1.png
-     - lib/assets/images/LP_2.png
-     - lib/assets/images/art_1.png
-     - lib/assets/images/mod_artwork.png
-     - lib/assets/images/mod_artwork2.png
-     - lib/assets/images/mod_artwork3.png
-     - lib/assets/images/artwork 7.png
-     - lib/assets/images/artwork 9.png
-     - lib/assets/images/home.png
-     - lib/assets/images/bridge.png
-     - lib/assets/images/brush.png
-     - lib/assets/images/canvas.png
-     - lib/assets/images/events.png
-     - lib/assets/images/man.png
-     - lib/assets/images/Login.png
-     - lib/assets/images/monsta.png
-     - lib/assets/images/rank_1.png
-     - lib/assets/images/rank_2.png
-     - lib/assets/images/piechart.png
+    - lib/assets/images/LP_1.png
+    - lib/assets/images/LP_2.png
+    - lib/assets/images/art_1.png
+    - lib/assets/images/mod_artwork.png
+    - lib/assets/images/mod_artwork2.png
+    - lib/assets/images/mod_artwork3.png
+    - lib/assets/images/artwork 7.png
+    - lib/assets/images/artwork 9.png
+    - lib/assets/images/home.png
+    - lib/assets/images/bridge.png
+    - lib/assets/images/brush.png
+    - lib/assets/images/canvas.png
+    - lib/assets/images/events.png
+    - lib/assets/images/man.png
+    - lib/assets/images/Login.png
+    - lib/assets/images/monsta.png
+    - lib/assets/images/rank_1.png
+    - lib/assets/images/rank_2.png
+    - lib/assets/images/rank_3.png
+    - lib/assets/images/rank_4.png
+    - lib/assets/images/rank_5.jpeg
+    - lib/assets/images/rank_6.png
+    - lib/assets/images/piechart.png
+    - lib/assets/images/event_1.jpg
+    - lib/assets/images/event_2.jpg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
