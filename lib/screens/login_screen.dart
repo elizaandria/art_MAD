@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'dashboard_screen.dart'; // Import your actual DashboardScreen
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -23,10 +24,10 @@ class _LoginPageState extends State<LoginPage> {
     // Simulate a delay for the login process (optional)
     await Future.delayed(const Duration(seconds: 1));
 
-    // Directly navigate to dashboard_screen.dart
+    // Navigate to the real DashboardScreen
     Navigator.pushReplacement(
-      BuildContext as BuildContext,
-      MaterialPageRoute(builder: (context) => const DashboardScreen()),
+      context,
+      MaterialPageRoute(builder: (context) => const DashboardScreen()), // Correct screen navigation
     );
 
     setState(() {
@@ -144,20 +145,6 @@ class _LoginPageState extends State<LoginPage> {
             ),
           ),
         ),
-      ),
-    );
-  }
-}
-
-// Placeholder for the actual dashboard screen
-class DashboardScreen extends StatelessWidget {
-  const DashboardScreen({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return const Scaffold(
-      body: Center(
-        child: Text('Dashboard Screen'),
       ),
     );
   }
