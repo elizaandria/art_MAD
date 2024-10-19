@@ -21,7 +21,7 @@ class ArtDashboard extends StatefulWidget {
 }
 
 class _ArtDashboardState extends State<ArtDashboard> {
-  int _selectedIndex = 0; // Track selected index for BottomNavigationBar
+  int _selectedIndex = 0;
 
   final List<Map<String, String>> artworks = [
     {
@@ -55,11 +55,50 @@ class _ArtDashboardState extends State<ArtDashboard> {
       "rank": "2",
       "image": "lib/assets/images/rank_2.png"
     },
+    {
+      "name": "Alice Zhang",
+      "location": "China",
+      "rank": "3",
+      "image": "lib/assets/images/rank_3.png"
+    },
+    {
+      "name": "Liam Martin",
+      "location": "UK",
+      "rank": "4",
+      "image": "lib/assets/images/rank_4.png"
+    },
+    {
+      "name": "Sophia Lee",
+      "location": "South Korea",
+      "rank": "5",
+      "image": "lib/assets/images/rank_5.jpeg"
+    },
+    {
+      "name": "Jonah K.",
+      "location": "Australia",
+      "rank": "6",
+      "image": "lib/assets/images/rank_6.png"
+    },
+  ];
+
+  final List<Map<String, String>> events = [
+    {
+      "title": "Art Expo 2024",
+      "date": "March 15, 2024",
+      "location": "New York, USA",
+      "image": "lib/assets/images/event_1.jpg"
+    },
+    {
+      "title": "Modern Art Festival",
+      "date": "April 22, 2024",
+      "location": "London, UK",
+      "image": "lib/assets/images/event_2.jpg"
+    },
   ];
 
   void _onItemTapped(int index) {
     setState(() {
-      _selectedIndex = index; // Update the selected index
+      _selectedIndex = index;
     });
   }
 
@@ -105,8 +144,8 @@ class _ArtDashboardState extends State<ArtDashboard> {
               leading: const Icon(Icons.art_track),
               title: const Text('Home'),
               onTap: () {
-                _onItemTapped(0); // Navigate to Artwork Gallery
-                Navigator.pop(context); // Close the drawer
+                _onItemTapped(0);
+                Navigator.pop(context);
               },
             ),
             ListTile(
@@ -115,7 +154,7 @@ class _ArtDashboardState extends State<ArtDashboard> {
               onTap: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => const ArtworkScreen()), // Navigate to ArtworkScreen
+                  MaterialPageRoute(builder: (context) => const ArtworkScreen()),
                 );
               },
             ),
@@ -123,18 +162,18 @@ class _ArtDashboardState extends State<ArtDashboard> {
               leading: const Icon(Icons.event),
               title: const Text('Events'),
               onTap: () {
-                _onItemTapped(2); // Navigate to Events
-                Navigator.pop(context); // Close the drawer
+                _onItemTapped(2);
+                Navigator.pop(context);
               },
             ),
           ],
         ),
       ),
       body: _selectedIndex == 0
-          ? _buildArtworkGallery() // Home Content
+          ? _buildArtworkGallery()
           : _selectedIndex == 1
-          ? _buildArtistRanking() // Artist Ranking Content
-          : _buildEvents(), // Events Content
+          ? _buildArtistRanking()
+          : _buildEvents(),
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
@@ -197,15 +236,17 @@ class _ArtDashboardState extends State<ArtDashboard> {
             style: TextStyle(fontSize: 24, fontWeight: FontWeight.w600),
           ),
           const SizedBox(height: 10),
-          GridView.count(
-            crossAxisCount: 2,
-            shrinkWrap: true,
-            physics: const NeverScrollableScrollPhysics(),
-            crossAxisSpacing: 10,
-            mainAxisSpacing: 10,
-            children: artists.map((artist) {
-              return ArtistCard(artist: artist);
-            }).toList(),
+          // Horizontal Scrollable Section
+          SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: Row(
+              children: artists.map((artist) {
+                return Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                  child: ArtistCard(artist: artist),
+                );
+              }).toList(),
+            ),
           ),
         ],
       ),
@@ -213,61 +254,42 @@ class _ArtDashboardState extends State<ArtDashboard> {
   }
 
   Widget _buildEvents() {
-    return const Center(
-      child: Text(
-        'Events Section',
-        style: TextStyle(fontSize: 24),
+    return SingleChildScrollView(
+      padding: const EdgeInsets.all(16.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const Text(
+            'Upcoming Events',
+            style: TextStyle(fontSize: 24, fontWeight: FontWeight.w600),
+          ),
+          const SizedBox(height: 10),
+          Column(
+            children: events.map((event) {
+              return EventCard(event: event);
+            }).toList(),
+          ),
+        ],
       ),
     );
   }
 }
 
-class ArtworkScreen extends StatelessWidget {
-  const ArtworkScreen({super.key});
+class EventCard extends StatelessWidget {
+  final Map<String, String> event;
+
+  const EventCard({super.key, required this.event});
 
   @override
   Widget build(BuildContext context) {
-    // Sample artworks data
-    final List<Map<String, String>> artworks = [
-      {
-        "title": "Reload - China Ink",
-        "artist": "Levakat",
-        "location": "Paris, France",
-        "rating": "6.5",
-        "price": "\$3,455",
-        "image": "lib/assets/images/art_1.png"
-      },
-      {
-        "title": "BEAUTIFUL MONSTER IV",
-        "artist": "Paco Peregrin",
-        "location": "Spain",
-        "rating": "8",
-        "price": "\$5,160",
-        "image": "lib/assets/images/monsta.png"
-      },
-    ];
-
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Artwork Gallery'),
-        backgroundColor: Colors.black,
-      ),
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const Text(
-              'Artwork Gallery',
-              style: TextStyle(fontSize: 24, fontWeight: FontWeight.w600),
-            ),
-            const SizedBox(height: 10),
-            Column(
-              children: artworks.map((artwork) {
-                return ArtworkCard(artwork: artwork);
-              }).toList(),
-            ),
-          ],
+    return Card(
+      color: Colors.grey[850],
+      margin: const EdgeInsets.symmetric(vertical: 8.0),
+      child: ListTile(
+        leading: Image.asset(event['image']!, width: 60, height: 60),
+        title: Text(event['title']!),
+        subtitle: Text(
+          '${event['date']} - ${event['location']}',
         ),
       ),
     );
@@ -320,6 +342,57 @@ class ArtistCard extends StatelessWidget {
             Image.asset(artist['image']!, width: 60, height: 60),
             const SizedBox(height: 8),
             Text(artist['location']!),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class ArtworkScreen extends StatelessWidget {
+  const ArtworkScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Artwork Gallery'),
+        backgroundColor: Colors.black,
+      ),
+      body: const SingleChildScrollView(
+        padding: EdgeInsets.all(16.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              'Artwork Gallery',
+              style: TextStyle(fontSize: 24, fontWeight: FontWeight.w600),
+            ),
+            SizedBox(height: 10),
+            Column(
+              children: [
+                ArtworkCard(
+                  artwork: {
+                    "title": "Reload - China Ink",
+                    "artist": "Levakat",
+                    "location": "Paris, France",
+                    "rating": "6.5",
+                    "price": "\$3,455",
+                    "image": "lib/assets/images/art_1.png",
+                  },
+                ),
+                ArtworkCard(
+                  artwork: {
+                    "title": "BEAUTIFUL MONSTER IV",
+                    "artist": "Paco Peregrin",
+                    "location": "Spain",
+                    "rating": "8",
+                    "price": "\$5,160",
+                    "image": "lib/assets/images/monsta.png",
+                  },
+                ),
+              ],
+            ),
           ],
         ),
       ),
